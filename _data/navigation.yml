@@ -1,0 +1,10 @@
+- name: Home
+  link: /
+- name: Datesets
+  link: /datasets.html
+- name: Draw
+  link: /draw.html
+- name: Server
+  link: /server.html
+- name: About
+  link: /about.html

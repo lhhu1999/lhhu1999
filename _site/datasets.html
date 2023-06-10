@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://unpkg.com/@rdkit/rdkit/dist/RDKit_minimal.js"></script>
+    <script>
+        window
+        .initRDKitModule()
+        .then(function (RDKit) {
+            console.log("RDKit version: " + RDKit.version());
+            window.RDKit = RDKit;
+        })
+        .catch(() => {
+        });
+        </script>
+        <style>
+            #canvas-container{
+                display: flex;
+            }
+        </style>
+    <title>Datasets</title>
+  </head>
+  <body>
+    <nav>
+    <body bgcolor=" #D8D8BF" style="font-family:Arial, Helvetica, sans-serif; margin:0; padding-top:0; height:100%;">
+    <div align="center" style="margin:0 auto; width: 1200px; color:#000000; background:#99CCCC; height:100%;">
+        <br><table align="center" style="width:100%; margin:0;">
+        <tbody><tr>
+            
+            <td><img align="center" style="width: 106px; height: 95px;float:left;" src="/yun.png"></td>
+            <td><h2 style="font-size:160%">MdDTI: multi-dimensional search for drug-target interaction prediction by preserving the consistency of attention distribution</h2></td>
+        </tr>
+        
+        </tbody></table>
+        <h2 align="center" style="font-size:150%; margin:0 auto">
+            <span>|</span>
+            <span><a href="/" style="color:#0000ff;">Home</a></span>
+            <span>|</span>
+            <span><a href="/datasets/" style="color: red;"style="color:#0000ff;">Datasets</a></span>
+            <span>|</span>
+            <span><a href="/draw/" style="color:#0000ff;">Draw</a></span>
+            <span>|</span>
+            <span><a href="/server/" style="color:#0000ff;">Server</a></span>
+            <span>|</span>
+            <span><a href="/about/" style="color:#0000ff;">About</a></span>
+            <span>|</span>
+        </h2><br><table align="center" style="width: 100%;color: #0000ff;">
+        <tbody><tr></tr></tbody></table>            
+    </div>
+</body>
+</nav>
+    <div align="center" style="border-top:0;padding-top:0;margin: 0 auto; width: 1200px; height:100%; background:#ffffff">
+    <div style="width: 80%; margin: 0 auto; text-align:justify; height:600px">
+        <h1 style="margin-top: 0;">datasets</h1>
+    </div>
+</div>
+  </body>
+</html>

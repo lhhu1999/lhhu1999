@@ -1,0 +1,44 @@
+---
+layout: default
+title: Draw
+---
+<div align="center" style="border-top:0;padding-top:0;margin: 0 auto; width: 1200px; height:100%; background:#ffffff">
+    <div style="width: 80%; margin: 0 auto; text-align:justify; height:600px">
+        <h1 style="margin-top: 0;">Smiles</h1>
+    <form>
+        <label for="smiles-input">Enter Smiles</label>
+        <input type="text" id="smiles-input" name="smiles"><br><br>
+        <input type="button" value="Draw Molecule" onclick="drawMolecule()">
+    </form>
+    <br>
+    <div id="example-1-output"></div>
+    <div id="canvas-container">
+        <canvas id="canvas-4" width="250" height="200"></canvas>
+        <canvas id="canvas-5" width="250" height="200"></canvas>
+    </div>
+    <script>
+        function drawMolecule(){
+            var smiles = "CC(=O)Oc1ccccc1C(=O)O"
+            var mol2 = RDKit.get_mol(smiles);
+            var mdetails = {}
+            mdetails['atoms'] = [0,1,10];
+            mdetails['explicitMethyl'] = true;
+            mdetails['addAtomIndices'] = true;
+            mdetails['legend'] = smiles;
+            var canvas = document.getElementById("canvas-4");
+            mol2.draw_to_canvas_with_highlights(canvas, JSON.stringify(mdetails));
+
+            var smiles2 = document.getElementById("smiles-input").value;
+            var mol = RDKit.get_mol(smiles2);
+            var mdetails2 = {}
+            mdetails2['atoms'] = [];
+            mdetails2['explicitMethyl'] = true;
+            mdetails2['addAtomIndices'] = true;
+            mdetails2['legend'] = smiles2;
+            var canvas2 = document.getElementById("canvas-5");
+            mol.draw_to_canvas_with_highlights(canvas2, JSON.stringify(mdetails2));
+
+        }
+    </script>
+    </div>
+</div>

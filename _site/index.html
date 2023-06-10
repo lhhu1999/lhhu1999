@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://unpkg.com/@rdkit/rdkit/dist/RDKit_minimal.js"></script>
+    <script>
+        window
+        .initRDKitModule()
+        .then(function (RDKit) {
+            console.log("RDKit version: " + RDKit.version());
+            window.RDKit = RDKit;
+        })
+        .catch(() => {
+        });
+        </script>
+        <style>
+            #canvas-container{
+                display: flex;
+            }
+        </style>
+    <title>Home</title>
+  </head>
+  <body>
+    <nav>
+    <body bgcolor=" #D8D8BF" style="font-family:Arial, Helvetica, sans-serif; margin:0; padding-top:0; height:100%;">
+    <div align="center" style="margin:0 auto; width: 1200px; color:#000000; background:#99CCCC; height:100%;">
+        <br><table align="center" style="width:100%; margin:0;">
+        <tbody><tr>
+            
+            <td><img align="center" style="width: 106px; height: 95px;float:left;" src="/yun.png"></td>
+            <td><h2 style="font-size:160%">MdDTI: multi-dimensional search for drug-target interaction prediction by preserving the consistency of attention distribution</h2></td>
+        </tr>
+        
+        </tbody></table>
+        <h2 align="center" style="font-size:150%; margin:0 auto">
+            <span>|</span>
+            <span><a href="/" style="color: red;"style="color:#0000ff;">Home</a></span>
+            <span>|</span>
+            <span><a href="/datasets/" style="color:#0000ff;">Datasets</a></span>
+            <span>|</span>
+            <span><a href="/draw/" style="color:#0000ff;">Draw</a></span>
+            <span>|</span>
+            <span><a href="/server/" style="color:#0000ff;">Server</a></span>
+            <span>|</span>
+            <span><a href="/about/" style="color:#0000ff;">About</a></span>
+            <span>|</span>
+        </h2><br><table align="center" style="width: 100%;color: #0000ff;">
+        <tbody><tr></tr></tbody></table>            
+    </div>
+</body>
+</nav>
+    <!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home</title>
+  </head>
+  <body>
+    <div align="center" style="border-top:0;padding-top:0;margin: 0 auto; width: 1200px; height:100%; background:#ffffff">
+        <br>
+            
+            <div style="width: 80%; margin: 0 auto; text-align: justify; min-height: 500px">
+              <div style="font-size:18px" align="justify">
+                <h3 style="text-align: left; margin-top: 0; margin-bottom: 2pt; font-size: 1.3em"><a name="_introduction">Introduction</a></h3>
+                 <p style="margin-top:6pt;margin-bottom:0pt; text-indent:2em; line-height:1.5">Identifying protein targets for drugs establish indispensable knowledge foundation for drug repurposing and drug development. Though expensive and time-consuming, vitro trials are widely employed to discover drug targets, and the existing relevant computational algorithms still cannot satisfy demand for real application in drug R&amp;D with regards to the prediction accuracy and performance efficiency, which are urgently needed to be improved. To this end, we propose here the PPAEDTI model, which uses the graph personalized propagation technique to predict drug-target interaction from the known interaction network. To evaluate the prediction performance, six benchmark datasets were used for testing with some state-of-the-art methods compared. As a result, using the 5-fold cross validation, the proposed PPAEDTI model achieves average AUCs&gt;90% on 5 collected datasets. We also manually checked the top-20 prediction list for 2 proteins (hsa:775 and hsa:779) and a kind of drug (D00618), and successfully confirmed 18, 17 and 20 items from the public datasets, respectively. The experimental results indicate that, given known drug-target interactions, the PPAEDTI model can provide accurate prediction for the new ones, which is anticipated to serve a useful tool for the pharmacology research.</p> <br>
+                <p style="margin-top:0pt;margin-bottom:6pt; text-indent:2em; line-height:1.5"><strong>Key words:</strong> drug; protein target; drug-target interactions prediction; personalized propagation auto-encoder. </p>
+          <br>
+                <figure style=" margin:6pt auto; text-align:center;">
+                  <img src="/PPAEDTI/static//pic/method.bmp" width="100%" alt="PPAEDTI web server">
+                  <figcaption style="text-align:center"><strong>Figure 1.The flowchart of PPAEDTI</strong></figcaption>
+                </figure> 
+                <br>
+              </div>
+            </div>
+        </div>
+  </body>
+</html>
+  </body>
+</html>
