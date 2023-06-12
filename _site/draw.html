@@ -53,40 +53,103 @@
 </nav>
     <div align="center" style="border-top:0;padding-top:0;margin: 0 auto; width: 1200px; height:100%; background:#ffffff">
     <div style="width: 80%; margin: 0 auto; text-align:justify; height:600px">
-        <h1 style="margin-top: 0;">Smiles</h1>
+        <h1 style="margin-top: 0; text-align: center;"">Draw Molecular</h1>
     <form>
-        <label for="smiles-input">Enter Smiles</label>
-        <input type="text" id="smiles-input" name="smiles"><br><br>
-        <input type="button" value="Draw Molecule" onclick="drawMolecule()">
+        <label for="smiles-input">输入SMILES:</label>
+        <input type="text" id="smiles-input" name="smiles" required>
+        <br><br>
+
+        <label for="addAtomIndices">显示原子下标:</label>
+        <select id="addAtomIndices" name="addAI">
+            <option value="true" selected>True</option>
+            <option value="false">False</option>
+        </select>
+        <br><br>
+
+        <label for="la">高亮原子列表:</label>
+        <input type="text" id="la" name="light_atoms" placeholder="例如:[1,2,3]">
+        <br><br>
+
+        <input type="button" id="submitBtn" value="Draw Molecule" onclick="drawMolecule()" disabled>
     </form>
     <br>
     <div id="example-1-output"></div>
     <div id="canvas-container">
-        <canvas id="canvas-4" width="250" height="200"></canvas>
-        <canvas id="canvas-5" width="250" height="200"></canvas>
+        <canvas id="canvas-1" width="250" height="200"></canvas>
+        <canvas id="myCanvas1" width="100" height="200"></canvas>
+        <canvas id="canvas-2" width="250" height="200"></canvas>
+        <canvas id="myCanvas2" width="100" height="200"></canvas>
+        <canvas id="canvas-3" width="250" height="200"></canvas>
     </div>
     <script>
+        const nameInput = document.getElementById('smiles-input');
+        const submitBtn = document.getElementById('submitBtn');
+        
+        nameInput.addEventListener('input', function() {
+            if (nameInput.value.trim() !== '') {
+            submitBtn.disabled = false;
+            } else {
+            submitBtn.disabled = true;
+            }
+        });
+
         function drawMolecule(){
-            var smiles = "CC(=O)Oc1ccccc1C(=O)O"
-            var mol2 = RDKit.get_mol(smiles);
-            var mdetails = {}
-            mdetails['atoms'] = [0,1,10];
-            mdetails['explicitMethyl'] = true;
-            mdetails['addAtomIndices'] = true;
-            mdetails['legend'] = smiles;
-            var canvas = document.getElementById("canvas-4");
-            mol2.draw_to_canvas_with_highlights(canvas, JSON.stringify(mdetails));
-
-            var smiles2 = document.getElementById("smiles-input").value;
-            var mol = RDKit.get_mol(smiles2);
+            var smiles = document.getElementById("smiles-input").value;
+            var addAI = (document.getElementById("addAtomIndices").value === "true");
+            var la = document.getElementById("la").value;
+            if(la == ''){
+                la = []
+            }else{
+                la = JSON.parse(la)
+            }
+            var mol = RDKit.get_mol(smiles);
+            var mdetails1 = {}
             var mdetails2 = {}
-            mdetails2['atoms'] = [];
+            mdetails1['atoms'] = [];
+            mdetails1['addAtomIndices'] = addAI;
+            mdetails1['legend'] = smiles;
+            mdetails2['atoms'] = la;
             mdetails2['explicitMethyl'] = true;
-            mdetails2['addAtomIndices'] = true;
-            mdetails2['legend'] = smiles2;
-            var canvas2 = document.getElementById("canvas-5");
-            mol.draw_to_canvas_with_highlights(canvas2, JSON.stringify(mdetails2));
+            mdetails2['addAtomIndices'] = addAI;
+            mdetails2['legend'] = smiles;
 
+            var canvas1 = document.getElementById("canvas-1");
+            mol.draw_to_canvas(canvas1,-1,-1);
+            drawArrow('myCanvas1', 5, 100, 95, 100);
+
+            console.log(mdetails1)
+            var canvas2 = document.getElementById("canvas-2");
+            mol.draw_to_canvas_with_highlights(canvas2, JSON.stringify(mdetails1));
+            drawArrow('myCanvas2', 5, 100, 95, 100);
+
+            var canvas3 = document.getElementById("canvas-3");
+            mol.draw_to_canvas_with_highlights(canvas3, JSON.stringify(mdetails2));
+
+        }
+
+        function drawArrow(canvasId, startX, startY, endX, endY) {
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext('2d');
+
+            ctx.beginPath();
+            ctx.moveTo(startX, startY);
+            ctx.lineTo(endX, endY);
+            ctx.strokeStyle = 'black';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            const arrowSize = 10;
+            const angle = Math.atan2(endY - startY, endX - startX);
+            const arrowX = endX - arrowSize * Math.cos(angle);
+            const arrowY = endY - arrowSize * Math.sin(angle);
+
+            ctx.beginPath();
+            ctx.moveTo(arrowX, arrowY);
+            ctx.lineTo(arrowX - arrowSize * Math.cos(angle - Math.PI / 6), arrowY - arrowSize * Math.sin(angle - Math.PI / 6));
+            ctx.lineTo(arrowX - arrowSize * Math.cos(angle + Math.PI / 6), arrowY - arrowSize * Math.sin(angle + Math.PI / 6));
+            ctx.closePath();
+            ctx.fillStyle = 'black';
+            ctx.fill();
         }
     </script>
     </div>
