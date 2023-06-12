@@ -5,5 +5,39 @@ title: Server
 <div align="center" style="border-top:0;padding-top:0;margin: 0 auto; width: 1200px; height:100%; background:#ffffff">
     <div style="width: 80%; margin: 0 auto; text-align:justify; height:600px">
     <h1 style="margin-top: 0;">Server</h1>
+    <form>
+      <label for="smiles-input">输入SMILES:</label>
+      <textarea id="smiles-input" name="smiles" required></textarea>
+      <br><br>
+
+      <label for="target-input">输入Sequence:</label>
+      <textarea id="target-input" name="target" required></textarea>
+      <br><br>
+
+      <input type="button" id="submitBtn_p" value="Predict" onclick="predict()" disabled>
+    </form>
+
+    <script>
+      const smilesInput = document.getElementById('smiles-input');
+      const targetInput = document.getElementById('target-input');
+      const submitBtn = document.getElementById('submitBtn_p');
+        
+      function checkInputs() {
+        if (smilesInput.value.trim() !== '' && targetInput.value.trim() !== '') {
+          submitBtn.disabled = false;
+        } else {
+          submitBtn.disabled = true;
+        }
+      };
+
+      smilesInput.addEventListener('input', checkInputs);
+      targetInput.addEventListener('input', checkInputs);
+
+      function predict(){
+        var smiles = document.getElementById("smiles-input").value;
+        var sequence = document.getElementById("target-input").value;
+        console.log(sequence)
+      }
+    </script>
   </div>
 </div>
