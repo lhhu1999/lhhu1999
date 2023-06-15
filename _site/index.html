@@ -65,8 +65,8 @@
             
             <div style="width: 80%; margin: 0 auto; text-align: justify; min-height: 500px">
               <div style="font-size:18px" align="justify">
-                <h3 style="text-align: left; margin-top: 0; margin-bottom: 2pt; font-size: 1.3em"><a name="_introduction">Introduction</a></h3>
-                 <p style="margin-top:6pt;margin-bottom:0pt; text-indent:2em; line-height:1.5">Identifying protein targets for drugs establish indispensable knowledge foundation for drug repurposing and drug development. The experimental results indicate that, given known drug-target interactions, the PPAEDTI model can provide accurate prediction for the new ones, which is anticipated to serve a useful tool for the pharmacology research.</p>
+                <h3 style="text-align: left; margin-top: 0; margin-bottom: 2pt; font-size: 1.3em"><a name="_introduction">摘要：</a></h3>
+                 <p style="margin-top:6pt;margin-bottom:0pt; text-indent:2em; line-height:1.5">预测药物 - 靶标相互作用（DTI）是药物再利用和新药物开发过程中的至关重要的一步。尽管注意机制已被广泛用于捕获药物与靶标之间的相互作用，但它主要使用分子的SMILES字符串和药物的2D分子图。我们提出了一种新的DTI预测模型MdDTI。该模型从药物的2D子结构和空间结构两个维度搜索与靶标可能产生相互作用的结合位点。对于2D子结构，我们使用了两种生成策略。对于空间结构，我们取了重原子的空间笛卡尔坐标，进而构建药物的空间特征。同时，为确保这两种方式的搜索结果保持一致，我们构建了一致性损失函数。最后，我们在4个DTI数据集和3个CPA数据集上评估了MdDTI的性能。结果表明，我们的模型优于一系列最先进的模型。</p>
                 <figure style=" margin-top:1pt; text-align:center;">
                   <img src="/figures/MdDTI.png" width="80%">
                   <figcaption style="text-align:center"><strong>Figure 1.The flowchart of MdDTI</strong></figcaption>

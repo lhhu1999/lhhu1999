@@ -4,6 +4,21 @@ title: Datasets
 ---
 <div align="center" style="border-top:0;padding-top:0;margin: 0 auto; width: 1200px; height:100%; background:#ffffff">
     <div style="width: 80%; margin: 0 auto; text-align:justify; height:600px">
-        <h1 style="margin-top: 0;">datasets</h1>
+        <h1 style="margin-top: 0; text-align: center;">数据集介绍及下载</h1>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;实验中我们总共收集了七个用于测试的数据集。其中，有四个用于药物 - 靶标相互作用（DTI）的数据集，三个用于化合物 - 蛋白结合亲和力（CPA）的数据集。DTI数据集用于预测药物和靶标之间是否存在相互作用。CPA数据集用于预测化合物和蛋白质之间的相互作用强度。
+        由于药物属于化合物的范畴，靶点是氨基酸序列，所以DTI和CPA可以统一描述为(D,T,Is)，其中D表示药物或化合物，T表示靶点或蛋白质。对于DTI，Is只能取0或1，而对于CPA，Is>=0。
+        <br>
+
+        <h2 style="margin-bottom: 3pt;"> DTI数据集：</h2>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<h3 style="display: inline;">Human</h3> <a href="/Human.txt" download>下载</a>: 包含2726个药物与2001条蛋白质之间的6728个相互作用数据。 <br><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<h3 style="display: inline;">C.elegans</h3> <a href="路径/文件名.扩展名" download="自定义文件名">下载</a>: 包含1767个药物与1876条蛋白质之间的7786个相互作用数据。 <br><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<h3 style="display: inline;">Davis</h3> <a href="路径/文件名.扩展名" download="自定义文件名">下载</a>: 包含68个药物与379条蛋白质之间的25772个相互作用数据。 <br><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<h3 style="display: inline;">KIBA</h3> <a href="路径/文件名.扩展名" download="自定义文件名">下载</a>: 包含2068个药物与225条蛋白质之间的116350个相互作用数据。 <br><br>
+        
+        <h2 style="margin-top: 1pt; margin-bottom: 3pt;"> CPA数据集：</h2>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<h3 style="display: inline;">Kd</h3> <a href="路径/文件名.扩展名" download="自定义文件名">下载</a>: 包含5895个化合物与812条蛋白质之间的12589个亲和力数据。 <br><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<h3 style="display: inline;">EC50</h3> <a href="路径/文件名.扩展名" download="自定义文件名">下载</a>: 包含31970个化合物与513条蛋白质之间的37896个亲和力数据。 <br><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<h3 style="display: inline;">Ki</h3> <a href="路径/文件名.扩展名" download="自定义文件名">下载</a>: 包含93437个化合物与1619条蛋白质之间的114525个亲和力数据。 <br><br>
+        
     </div>
 </div>
