@@ -4,7 +4,7 @@ title: Server
 ---
 <div align="center" style="border-top:0;padding-top:0;margin: 0 auto; width: 1200px; height:100%; background:#ffffff">
     <div style="width: 80%; margin: 0 auto; text-align:justify; height:600px">
-    <h1 style="margin-top: 0; text-align: center;">DTI预测</h1>
+    <h1 style="margin-top: 0; text-align: center;">亲和力预测</h1>
     <form>
       <label for="smiles-input">输入SMILES:</label>
       <textarea id="smiles-input" name="smiles" required></textarea> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -13,7 +13,9 @@ title: Server
       <textarea id="target-input" name="target" required></textarea> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
       <input type="button" id="submitBtn_p" value="Predict" onclick="predict()" disabled>
-      <a href="http://localhost:8080">xxx</a>
+      <a href="http://localhost:8080">xxx</a><br>
+      <h3 style="margin-bottom: 0;"">药物-氨基酸注意力分布图:</h3> 
+      <div style="margin-top: 0;" id="heatmap-container"></div>
     </form>
 
     <script>
@@ -37,6 +39,38 @@ title: Server
         var sequence = document.getElementById("target-input").value;
         console.log(sequence)
       }
+
+    
+// 假设数据是一个一维数组，表示热力图的一行
+var data = [0.2, 0.3, 0.5, 0.8, 0.6,0.2, 0.3, 0.5, 0.8, 0.6,0.2, 0.3, 0.5, 0.8, 0.6,0.2, 0.3, 0.5, 0.8, 0.6,0.2, 0.3, 0.5, 0.8, 0.6];
+
+// 定义画布的宽度和高度
+var width = 400;
+var height = 10;
+
+// 创建热力图容器元素的选择器
+var container = d3.select("#heatmap-container");
+
+// 创建热力图画布
+var svg = container.append("svg")
+  .attr("width", width)
+  .attr("height", height);
+
+// 创建颜色比例尺，用于将数据值映射到颜色
+var colorScale = d3.scaleLinear()
+  .domain([0, 1])  // 数据范围
+  .range(["white", "red"]);  // 颜色范围
+
+// 绘制热力图单元格
+var cells = svg.selectAll("rect")
+  .data(data)
+  .enter()
+  .append("rect")
+  .attr("x", function(d, i) { return i * (width / data.length); })
+  .attr("y", 0)
+  .attr("width", width / data.length)
+  .attr("height", height)
+  .style("fill", function(d) { return colorScale(d); });
     </script>
   </div>
 </div>
