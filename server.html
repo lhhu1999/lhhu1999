@@ -18,11 +18,17 @@ title: Server
             <option value="ESPF">ESPF</option>
         </select> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-      <input type="button" id="submitBtn_p" value="Predict" onclick="predict()" disabled>
+      <input type="button" id="submitBtn_p" value="Predict" onclick="predict()" disabled> <br><br>
       
-      <h3 style="margin-bottom: 0;"">药物-氨基酸注意力分布图:</h3> 
-      <div style="margin-top: 0;" id="heatmap-container"></div>
+      <h3 style="margin-top: 3pt; display: inline;">亲和力值:&nbsp;&nbsp;&nbsp;<a id="CPA"></a></h3>
+
+      <h3 style="margin-bottom: 0;">药物-氨基酸注意力分布图:</h3> 
+      <div style="margin-top: 6pt;" id="heatmap-container"></div>
+
+      <br><h3 style="margin-top: 3pt; display: inline;">注意力最高的三个位置(从0开始):&nbsp;&nbsp;&nbsp;<a id="ind"></a></h3>
     </form>
+
+    <!-- CCCCCCCCCC1=[N+]([O-])C2=CC=CC=C2C(O)=C1 MVTRFLGPRYRELVKNWVPTAYTWGAVGAVGLVWATDWRLILDWVPYINGKFKKDN -->
 
     <script>
       const smilesInput = document.getElementById('smiles-input');
@@ -45,6 +51,8 @@ title: Server
         var sequence = document.getElementById("target-input").value;
         console.log(sequence)
 
+        document.getElementById("CPA").innerHTML = "8.71";
+
         var subs = document.getElementById("substructure").value;
         if(subs == 'ICMF'){
           draw_icmf()
@@ -56,11 +64,11 @@ title: Server
 
       function draw_icmf(){
         // 假设数据是一个一维数组，表示热力图的一行
-        var data = [0.2, 0.3, 0.5, 0.8, 0.6,0.2, 0.3, 0.5, 0.8, 0.6,0.2, 0.3, 0.5, 0.8, 0.6,0.2, 0.3, 0.5, 0.8, 0.6,0.2, 0.3, 0.5, 0.8, 0.6];
+        var data = [0.03678154, 0.034276843, 0.041193448, 0.039676048, 0.03544958, 0.043605182, 0.045817584, 0.045333136, 0.03978277, 0.041911297, 0.04516439, 0.03971129, 0.03652176, 0.036801346, 0.033802748, 0.040603094, 0.040533096, 0.045375533, 0.033041105, 0.040057603, 0.034296554, 0.037747286, 0.041340772, 0.036900684, 0.032810997, 0.039656393, 0.04360159, 0.04386238, 0.040251035, 0.041820936, 0.043847777, 0.034599096, 0.03305818, 0.03452052, 0.033689745, 0.035922512, 0.034713913, 0.033246104, 0.037735697, 0.040263746, 0.03397952, 0.04075237, 0.04272525, 0.038452577, 0.040909074, 0.040587887, 0.033197917, 0.035564717, 0.035217494, 0.04339848, 0.035393544, 0.030240502, 0.03626395, 0.036607377, 0.033497248, 0.034864776];
 
         // 定义画布的宽度和高度
-        var width = 400;
-        var height = 10;
+        var width = 840;
+        var height = 15;
 
         // 创建热力图容器元素的选择器
         var container = d3.select("#heatmap-container");
@@ -72,8 +80,8 @@ title: Server
 
         // 创建颜色比例尺，用于将数据值映射到颜色
         var colorScale = d3.scaleLinear()
-          .domain([0, 1])  // 数据范围
-          .range(["white", "red"]);  // 颜色范围
+          .domain([0, 0.046])  // 数据范围
+          .range(["white", "green"]);  // 颜色范围
 
         // 绘制热力图单元格
         var cells = svg.selectAll("rect")
@@ -85,15 +93,26 @@ title: Server
           .attr("width", width / data.length)
           .attr("height", height)
           .style("fill", function(d) { return colorScale(d); });
+        
+          var sortedIndices = data.map(function(value, index) {
+            return { value: value, index: index };
+          }).sort(function(a, b) {
+            return b.value - a.value;
+          }).slice(0, 3).map(function(item) {
+            return item.index;
+          });
+
+          console.log(sortedIndices)
+          document.getElementById("ind").innerHTML = sortedIndices;
       }
 
       function draw_espf(){
         // 假设数据是一个一维数组，表示热力图的一行
-        var data = [0.2, 0.3, 0.5, 0.8, 0.6,0.2, 0.3, 0.5, 0.8, 0.6,0.2, 0.3, 0.5, 0.8, 0.6,0.2, 0.3, 0.5, 0.8, 0.6,0.2, 0.3, 0.5, 0.8, 0.6];
+        var data = [0.036467798, 0.034271248, 0.041139342, 0.040972494, 0.03524542, 0.046281952, 0.03811091, 0.046911746, 0.036246352, 0.04266128, 0.04320524, 0.04461999, 0.037704825, 0.036666624, 0.033370942, 0.041497014, 0.04085532, 0.048147894, 0.03520841, 0.03836983, 0.03967214, 0.03518766, 0.038057335, 0.03649007, 0.034820657, 0.03536638, 0.04530388, 0.040542673, 0.03432184, 0.04259418, 0.040038228, 0.03760295, 0.036868803, 0.034427486, 0.035176978, 0.03312269, 0.03536444, 0.03671664, 0.03605835, 0.037298117, 0.03497344, 0.03801512, 0.041005246, 0.03748022, 0.0499515, 0.040596526, 0.034599144, 0.041630022, 0.039805442, 0.04826144, 0.040379353, 0.034391053, 0.04085379, 0.03732712, 0.039310127, 0.036486935];
 
         // 定义画布的宽度和高度
-        var width = 400;
-        var height = 10;
+        var width = 840;
+        var height = 15;
 
         // 创建热力图容器元素的选择器
         var container = d3.select("#heatmap-container");
@@ -105,8 +124,8 @@ title: Server
 
         // 创建颜色比例尺，用于将数据值映射到颜色
         var colorScale = d3.scaleLinear()
-          .domain([0, 1])  // 数据范围
-          .range(["white", "red"]);  // 颜色范围
+          .domain([0, 0.046])  // 数据范围
+          .range(["white", "green"]);  // 颜色范围
 
         // 绘制热力图单元格
         var cells = svg.selectAll("rect")
@@ -118,6 +137,16 @@ title: Server
           .attr("width", width / data.length)
           .attr("height", height)
           .style("fill", function(d) { return colorScale(d); });
+
+          var sortedIndices = data.map(function(value, index) {
+            return { value: value, index: index };
+          }).sort(function(a, b) {
+            return b.value - a.value;
+          }).slice(0, 3).map(function(item) {
+            return item.index;
+          });
+
+          document.getElementById("ind").innerHTML = sortedIndices;
       }
     </script>
   </div>
